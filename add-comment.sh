@@ -48,6 +48,12 @@ get_checks() {
 	echo "start get_checks()"
 	# Get all the checks for the sha.
 	body=$(curl -sSL -H "${AUTH_HEADER}" -H "${API_HEADER}" "${URI}/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/check-runs")
+	echo "AUTH_HEADER: ${AUTH_HEADER}"
+	echo "API_HEADER: ${API_HEADER}"
+	echo "URI: ${URI}"
+	echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
+	echo "GITHUB_SHA: ${GITHUB_SHA}"
+	echo "------------------------------------------------------------"
 	echo "Body: $body"
 	echo "------------------------------------------------------------"
 
