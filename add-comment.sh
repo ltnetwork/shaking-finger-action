@@ -45,10 +45,15 @@ post_gif() {
 }
 
 get_checks() {
+	echo "start get_checks()"
 	# Get all the checks for the sha.
 	body=$(curl -sSL -H "${AUTH_HEADER}" -H "${API_HEADER}" "${URI}/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/check-runs")
+	echo "Body: $body"
+	echo "------------------------------------------------------------"
 
 	checks=$(echo "$body" | jq --raw-output '.check_runs | .[] | {name: .name, status: .status, conclusion: .conclusion} | @base64')
+	echo "Checks: $checks"
+	echo "------------------------------------------------------------"
 
 	IN_PROGRESS=0
 	for c in $checks; do
@@ -89,6 +94,7 @@ get_checks() {
 	# We made it to the end and nothing failed so let's delete the comment if it
 	# exists.
 	delete_comment_if_exists;
+	echo "finish get_checks()"
 }
 
 main() {
