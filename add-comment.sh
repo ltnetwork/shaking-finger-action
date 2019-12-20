@@ -24,6 +24,9 @@ post_gif() {
 }
 
 main() {
+	# Get the pull request number.
+	NUMBER=$(jq --raw-output .number "$GITHUB_EVENT_PATH")
+
 	post_gif;
 }
 
